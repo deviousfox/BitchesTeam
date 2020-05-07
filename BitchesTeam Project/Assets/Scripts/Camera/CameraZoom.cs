@@ -1,5 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿//   !!!WARNING!!!
+// This code writing
+//   by deviousFox
+//    END WARNING
+
 using UnityEngine;
 
 public class CameraZoom : MonoBehaviour
