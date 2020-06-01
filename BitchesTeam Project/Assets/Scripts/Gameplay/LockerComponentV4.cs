@@ -20,19 +20,19 @@ class LockerComponentV4 : MonoBehaviour
     {
         LockerTransform.position = StartTransform.position;
     }
-    public void OnMouseDown()
+    public void LockerInteract()
     {
         Vector2 direction = EndTransform.position - StartTransform.position;
         RaycastHit2D[] raycastHits = Physics2D.RaycastAll(StartTransform.position, direction, ObstacleMask);
         if (raycastHits.Length >= 1)
         {
             print(raycastHits.Length);
-
+            print("raycastHits[0]" + raycastHits[0].transform.name);
             for (int i = 0; i <raycastHits.Length; i++)
             {
               print(  raycastHits[i].transform.name);
             }
-            if (raycastHits[0].transform == transform)
+            if (raycastHits[0].transform.parent == LockerTransform)
             {
                 print("J is"+LockersCounting(raycastHits));
                 if (LockersCounting(raycastHits)<=1)
@@ -44,6 +44,7 @@ class LockerComponentV4 : MonoBehaviour
                     StartCoroutine(LockIndication());
                 }
             }
+            else { StartCoroutine(LockIndication()); }
 
         }
         else if (raycastHits.Length == 0)
