@@ -19,7 +19,7 @@ public class LiquidSpawner : MonoBehaviour
         while (quantity <= _liquidQuantity)
         {
             Vector3 spawnpoint = new Vector3(Random.Range(0.3f,0.7f), Random.Range(0.3f, 0.7f),0f);
-            Instantiate(_goPref,transform.position + spawnpoint, Quaternion.identity);
+            Instantiate(_goPref,transform.position + spawnpoint, Quaternion.identity,transform);
             quantity++;
         }
     }
