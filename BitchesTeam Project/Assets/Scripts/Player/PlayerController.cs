@@ -5,31 +5,36 @@ using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
-    public float speed;
+    [SerializeField] private float _speed;
 
-    private PlayerBody body;
-    private PlayerHead head;
+    [SerializeField] private bool _canMove;
+
+    private PlayerBody _body;
+    private PlayerHead _head;
 
 
-    public List<TargetObject> Targets;
+    private List<TargetObject> _targets;
+
+    private void OnMouseDown()
+    {
+        _canMove = !_canMove;
+    }
 
     void Start()
     {
-        body = body ?? GetComponentInChildren<PlayerBody>();
-        head = head ?? GetComponentInChildren<PlayerHead>();
-        Targets = FindObjectsOfType<TargetObject>().ToList();
+        _body = _body ?? GetComponentInChildren<PlayerBody>();
+        _head = _head ?? GetComponentInChildren<PlayerHead>();
+        _targets = FindObjectsOfType<TargetObject>().ToList();
     }
 
     private void Update()
     {
-        if (Time.renderedFrameCount%5 ==0)
+        if (Time.renderedFrameCount%5 ==0 && _canMove)
         {
-            Vector3 direction = GetCurrentTarget(Targets).transform.position - transform.position;
-            direction.Normalize();
-            direction = new Vector3(direction.x, 0, 0);
-            transform.position += direction * Time.deltaTime*speed;
+            MoveToTarget();
         }
     }
+
     public TargetObject GetCurrentTarget(List<TargetObject> targetObjects)
     {
         var obj = from t in targetObjects
@@ -37,7 +42,14 @@ public class PlayerController : MonoBehaviour
                   select t;
         return obj.ToList()[0];
     }
+
+    public void MoveToTarget()
+    {
+        Vector3 direction = GetCurrentTarget(_targets).transform.position - transform.position;
+        direction.Normalize();
+        direction = new Vector3(direction.x, 0, 0);
+        transform.position += direction * Time.deltaTime * _speed;
+    }
     // TODO:
-    // move from treasures,
-    // or any level target
+    // smooth move and target serch
 }

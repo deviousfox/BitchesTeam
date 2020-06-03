@@ -5,7 +5,6 @@
 
 using System.Collections;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 class LockerComponentV4 : MonoBehaviour
 {
@@ -26,15 +25,8 @@ class LockerComponentV4 : MonoBehaviour
         RaycastHit2D[] raycastHits = Physics2D.RaycastAll(StartTransform.position, direction, ObstacleMask);
         if (raycastHits.Length >= 1)
         {
-            print(raycastHits.Length);
-            print("raycastHits[0]" + raycastHits[0].transform.name);
-            for (int i = 0; i <raycastHits.Length; i++)
-            {
-              print(  raycastHits[i].transform.name);
-            }
             if (raycastHits[0].transform.parent == LockerTransform)
             {
-                print("J is"+LockersCounting(raycastHits));
                 if (LockersCounting(raycastHits)<=1)
                 {
                     StartCoroutine(MoveLocker());
@@ -60,7 +52,6 @@ class LockerComponentV4 : MonoBehaviour
 
     IEnumerator MoveLocker()
     {
-        print("Coroutine is START");
         while (LockerTransform.position != EndTransform.position) // Возможно придется поиграться с условием
         {
             LockerTransform.position = Vector3.Lerp(LockerTransform.position, EndTransform.position, MoveSpeed * Time.deltaTime);
@@ -103,8 +94,7 @@ class LockerComponentV4 : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawRay(StartTransform.position, EndTransform.position - StartTransform.position);
     }
-
-
+    
 }
 
 

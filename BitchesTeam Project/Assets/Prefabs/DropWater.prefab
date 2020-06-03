@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1594427065732873648}
   - component: {fileID: 1290625315926087970}
   - component: {fileID: 1794998567361033032}
+  - component: {fileID: -8850082446883816228}
   - component: {fileID: 837387398896868799}
   m_Layer: 8
   m_Name: DropWater
@@ -98,6 +99,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.4
+--- !u!114 &-8850082446883816228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4551711674269800516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3e6d731005aa24383d2b0f9b3c29f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 0
+  _liquidType: 0
 --- !u!50 &837387398896868799
 Rigidbody2D:
   serializedVersion: 4

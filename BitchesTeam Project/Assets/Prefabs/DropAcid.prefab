@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1568202115206611684}
   - component: {fileID: 1300112675787253366}
   - component: {fileID: 1948590635712580636}
+  - component: {fileID: -4742016719000380310}
   - component: {fileID: 611691386408559339}
   m_Layer: 8
   m_Name: DropAcid
@@ -98,6 +99,20 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.25
+--- !u!114 &-4742016719000380310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4380094591441250064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a3e6d731005aa24383d2b0f9b3c29f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 5
+  _liquidType: 2
 --- !u!50 &611691386408559339
 Rigidbody2D:
   serializedVersion: 4
