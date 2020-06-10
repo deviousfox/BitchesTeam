@@ -1,0 +1,8 @@
+
+VER > 0.0.04
+
++ Update player AI
+	Now the player moves only when he can reach the goal
+
++ ChangeLog.txt added
+	Now you can see the full list of changes in this file

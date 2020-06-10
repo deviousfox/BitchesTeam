@@ -5,6 +5,8 @@ using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
+    public LayerMask TargetsMask;
+
     [SerializeField] private float _speed;
 
     [SerializeField] private bool _canMove;
@@ -14,6 +16,7 @@ public class PlayerController : MonoBehaviour
 
 
     private List<TargetObject> _targets;
+    private TargetObject _currentTarget;
 
     private void OnMouseDown()
     {
@@ -25,13 +28,22 @@ public class PlayerController : MonoBehaviour
         _body = _body ?? GetComponentInChildren<PlayerBody>();
         _head = _head ?? GetComponentInChildren<PlayerHead>();
         _targets = FindObjectsOfType<TargetObject>().ToList();
+
+        GetCurrentTarget(_targets);
     }
 
     private void Update()
     {
-        if (Time.renderedFrameCount%5 ==0 && _canMove)
+        if (_canMove)
         {
-            MoveToTarget();
+            if (CanTouchTarget())
+            {
+                MoveToTarget();
+            }
+            else
+            {
+                _canMove = !_canMove; 
+            }
         }
     }
 
@@ -40,12 +52,28 @@ public class PlayerController : MonoBehaviour
         var obj = from t in targetObjects
                   orderby t.PriorityWeigth
                   select t;
-        return obj.ToList()[0];
+        _currentTarget = obj.ToList()[0];
+        return _currentTarget;
+    }
+
+    public bool CanTouchTarget()
+    {
+        Transform targetTransform = _currentTarget.transform;
+        Vector2 direction = targetTransform.position - transform.position;
+        RaycastHit2D targetHit = Physics2D.Raycast(transform.position, direction,100f, TargetsMask);
+        if (targetHit.transform == targetTransform)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void MoveToTarget()
     {
-        Vector3 direction = GetCurrentTarget(_targets).transform.position - transform.position;
+        Vector3 direction = _currentTarget.transform.position - transform.position;
         direction.Normalize();
         direction = new Vector3(direction.x, 0, 0);
         transform.position += direction * Time.deltaTime * _speed;
